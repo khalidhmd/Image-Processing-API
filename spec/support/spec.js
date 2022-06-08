@@ -12,11 +12,12 @@ describe("A suite", function () {
       server.close(done);
     }
   });
+
   it("contains spec with an expectation", function () {
     request(server)
       .get("/api")
-      // .expect("Content-Type", /json/)
-      // .expect("Content-Length", "15")
+      .expect("Content-Type", /text/)
+      .expect("Content-Length", "connected...".length.toString())
       .expect(200)
       .end(function (err, res) {
         if (err) throw err;
