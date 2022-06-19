@@ -1,6 +1,6 @@
 import express from 'express';
-import teachers from './api/teachers';
-import students from './api/students';
+import images from './api/images';
+import thumbs from './api/thumbs';
 
 const routes = express.Router();
 
@@ -8,7 +8,7 @@ routes.get('/', (req, res) => {
   res.send('connected...');
 });
 
-routes.use('/students', students);
-routes.use('/teachers', teachers);
+routes.use('/images', images);
+routes.use('/thumbs', thumbs);
 
 export default routes;
