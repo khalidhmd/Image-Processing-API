@@ -1,13 +1,23 @@
 import express from 'express';
-import fs from 'fs';
+import { promises } from 'fs';
 import path from 'path';
 
 const images = express.Router();
 
 // serve original images (no processing) form images folder
-images.get('/', (req, res) => {
+images.get('/', async (req, res) => {
   const file = req.query.file;
-  res.sendFile(path.join(__dirname, '../../../images/') + file);
+  const filePath = path.join(__dirname, '../../../images/') + file;
+  try {
+    // check if file is accessible
+    const fileExisits = await promises.access(filePath);
+
+    //send the file if it's accessible
+    res.sendFile(filePath);
+  } catch (error: any) {
+    console.log(error.message);
+    res.status(500).send(error.message);
+  }
 });
 
 export default images;
