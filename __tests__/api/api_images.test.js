@@ -2,7 +2,10 @@ import request from 'supertest';
 import { server } from '../../src/index';
 import assert from 'assert';
 
-describe('"/api" route', function () {
+describe('"/api/thumbs?file=&w=&h=" route', function () {
+  beforeAll(() => {
+    server.close();
+  });
   it('send a text response: "connected..."', function (done) {
     request(server)
       .get('/api')
