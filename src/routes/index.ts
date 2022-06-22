@@ -4,7 +4,7 @@ import thumbs from './api/thumbs';
 
 const routes = express.Router();
 
-//this route is used to check that the server is running and accessible from client app
+//this route is used to check, from client app, that the server is running and accessible
 routes.get('/', (req, res) => {
   res.send('connected...');
 });

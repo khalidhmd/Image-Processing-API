@@ -1,20 +1,13 @@
 import express from 'express';
-// import { promises } from 'fs';
-import path from 'path';
-import fileExists from '../../helpers/fileExists';
-const images = express.Router();
+import checkImage from '../../middleware/checkImage';
 
-// serve original images (no processing) form images folder
+const images = express.Router();
+images.use(checkImage);
+
+// serve original images (no processing) from images folder
 images.get('/', async (req, res) => {
-  const file = req.query.file;
-  const filePath = path.join(__dirname, '../../../images/') + file;
-  const exists = await fileExists(filePath);
-  if (exists) {
-    //send the file if it's accessible
-    res.sendFile(filePath);
-  } else {
-    res.status(200).send('file does not exist');
-  }
+  //send the file if it's accessible
+  res.sendFile(<string>req.imagePath);
 });
 
 export default images;
