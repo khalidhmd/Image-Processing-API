@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 import processThumb from '../processing/processThumb';
 
-// serve files form thumbs folder
+// call "createThumb" process
 const createThumb = async (req: Request, res: Response, next: () => void) => {
   // create thumb
-  const exists = await processThumb(
+  const success = await processThumb(
     <string>req.imagePath,
     <string>req.thumbPath,
     parseInt(<string>req.query.w),
     parseInt(<string>req.query.h),
   );
-  if (exists) {
+  if (success) {
     req.thumbExist = true;
   } else {
     req.thumbExist = false;

@@ -1,5 +1,6 @@
 import sharp from 'sharp';
 
+// simply resize the images and save the result to thumb folder
 const processThumb = async (
   imagePath: string,
   thumbPath: string,

@@ -13,6 +13,7 @@ const checkThumb = async (req: Request, res: Response, next: () => void) => {
 
   // check that width and height are in correct format
   if (isNaN(h) || isNaN(w)) {
+    // send the response if the width/height values are not valid numiric values
     res.send('Error: width or height is in bad format');
   }
 
@@ -21,8 +22,10 @@ const checkThumb = async (req: Request, res: Response, next: () => void) => {
   const exists = await fileExists(thumbPath);
   req.thumbPath = thumbPath;
   if (exists) {
+    // send the thumb file if it's already exist
     return res.sendFile(req.thumbPath);
   }
+  // pass onto the next middleware if the thumb files does not exist and the request is valid
   next();
 };
 

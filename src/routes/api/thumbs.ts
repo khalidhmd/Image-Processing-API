@@ -9,9 +9,8 @@ thumbs.use(checkImage);
 thumbs.use(checkThumb);
 thumbs.use(createThumb);
 
-// serve original images (no processing) form images folder
+// serve thumb file
 thumbs.get('/', async (req, res) => {
-  console.log('here');
   res.sendFile(<string>req.thumbPath);
 });
 

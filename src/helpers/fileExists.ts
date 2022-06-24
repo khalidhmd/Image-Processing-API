@@ -1,5 +1,6 @@
 import { promises } from 'fs';
 
+// returns 'true' if the file is accessible, or 'false' if otherwise.
 const fileExists = async (filePath: string) => {
   try {
     // check if file is accessible
