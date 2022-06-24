@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import processThumb from '../processing/processThumb';
 
-// call "createThumb" process
+//  "createThumb" middleware
 const createThumb = async (req: Request, res: Response, next: () => void) => {
-  // create thumb
+  // create thumb by calling "processThumb" function
   const success = await processThumb(
     <string>req.imagePath,
     <string>req.thumbPath,
