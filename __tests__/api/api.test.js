@@ -1,21 +1,20 @@
 import request from 'supertest';
-import { server } from '../../src/index';
-import assert from 'assert';
+import app from '../../src/app';
 
 describe('"/api" route', function () {
   it('send a text response: "connected..."', function (done) {
-    request(server)
+    request(app)
       .get('/api')
-      .expect('Content-Type', /text/)
+      .expect('Content-Type', /json/)
       .expect(200)
-      .then((response) => {
-        assert(response.body, 'connected...');
+      .expect((response) => {
+        expect(response.body).toBe('connected...');
         done();
       })
       .catch((err) => {
         done(err);
-      })
-      .finally(() => server.close());
+      });
+    // .finally(() => server.close());
     // .end(function (err, res) {
     //   if (err) return done(err);
     //   server.close();
