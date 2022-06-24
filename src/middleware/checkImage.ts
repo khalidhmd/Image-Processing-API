@@ -12,7 +12,7 @@ const checkImage = async (req: Request, res: Response, next: () => void) => {
     //send the file if it's accessible
     req.imagePath = filePath;
   } else {
-    return res.send('Error: image does not exist.');
+    return res.json('Error: image does not exist.');
   }
   next();
 };
