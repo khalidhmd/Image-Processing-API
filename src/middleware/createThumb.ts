@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import processThumb from '../processing';
+import processThumb from '../processing/processThumb';
 
 // serve files form thumbs folder
 const createThumb = async (req: Request, res: Response, next: () => void) => {
