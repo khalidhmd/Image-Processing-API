@@ -6,7 +6,12 @@ describe('File exist helper method:', function () {
     const exists = await fileExists(
       path.join(__dirname, '../../images/', 'fjord.jpg'),
     );
-
     expect(exists).toBeTruthy();
+  });
+  it('returns false if called on non-existing file', async function () {
+    const exists = await fileExists(
+      path.join(__dirname, '../../images/', 'fjordxxx.jpg'),
+    );
+    expect(exists).toBeFalsy();
   });
 });
