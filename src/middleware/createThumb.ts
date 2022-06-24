@@ -1,15 +1,18 @@
 import { Request, Response } from 'express';
-import sharp from 'sharp';
+import processThumb from '../processing';
 
 // serve files form thumbs folder
 const createThumb = async (req: Request, res: Response, next: () => void) => {
   // create thumb
-  try {
-    await sharp(req.imagePath)
-      .resize(parseInt(<string>req.query.w), parseInt(<string>req.query.h))
-      .toFile(<string>req.thumbPath);
+  const exists = await processThumb(
+    <string>req.imagePath,
+    <string>req.thumbPath,
+    parseInt(<string>req.query.w),
+    parseInt(<string>req.query.h),
+  );
+  if (exists) {
     req.thumbExist = true;
-  } catch (error) {
+  } else {
     req.thumbExist = false;
   }
   next();
