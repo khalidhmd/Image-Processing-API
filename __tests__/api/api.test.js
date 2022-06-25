@@ -8,7 +8,7 @@ describe('"/api" route', function () {
       .expect('Content-Type', /json/)
       .expect(200)
       .expect((response) => {
-        expect(response.body).toBe('connected...');
+        expect(response.body.message).toBe('connected...');
         done();
       })
       .catch((err) => {

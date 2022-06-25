@@ -6,15 +6,15 @@ import fileExists from '../helpers/fileExists';
 const checkThumb = async (req: Request, res: Response, next: () => void) => {
   const file = <string>req.query.file;
   const thumbArray = file.split('.');
-  const width = req.query.w || 'a';
-  const height = req.query.h || 'a';
+  const width = req.query.w;
+  const height = req.query.h;
   const w = parseInt(<string>width);
   const h = parseInt(<string>height);
 
   // check that width and height are in correct format
   if (isNaN(h) || isNaN(w)) {
     // send the response if the width/height values are not valid numiric values
-    res.send('Error: width or height is in bad format');
+    res.json({ error: 'Error: width or height is in bad format' });
   }
 
   const thumbFile = `${thumbArray[0]}_${width}_${height}.${thumbArray[1]}`;

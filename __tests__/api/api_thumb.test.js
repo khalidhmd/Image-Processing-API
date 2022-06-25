@@ -18,7 +18,23 @@ describe('"/api/images" route', function () {
       .expect(200)
       .expect('Content-Type', /json/)
       .expect((response) => {
-        expect(response.body).toBe('Error: image does not exist.');
+        expect(response.body.error).toBe('Error: image does not exist.');
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  it('respond with Error message "Error: width or height is in bad format" if width or height are not in correct format', function (done) {
+    request(app)
+      .get('/api/thumbs/?file=fjord.jpg&w=xx&h=xx')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .expect((response) => {
+        expect(response.body.error).toBe(
+          'Error: width or height is in bad format',
+        );
         done();
       })
       .catch((err) => {

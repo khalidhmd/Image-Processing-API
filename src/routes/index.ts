@@ -6,7 +6,7 @@ const routes = express.Router();
 
 //this route is used to check, from client app, that the server is running and accessible
 routes.get('/', (req, res) => {
-  res.json('connected...');
+  res.json({ message: 'connected...' });
 });
 
 //original images route

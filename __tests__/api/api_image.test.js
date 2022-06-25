@@ -12,13 +12,13 @@ describe('"/api/images" route', function () {
       .catch((err) => done(err));
   });
 
-  it('respond with Error message "Error: image does not exist." is image file does not exists', function (done) {
+  it('respond with Error message "Error: image does not exist." if image file does not exists', function (done) {
     request(app)
       .get('/api/images/?file=fjordxxx.jpg')
       .expect(200)
       .expect('Content-Type', /json/)
       .expect((response) => {
-        expect(response.body).toBe('Error: image does not exist.');
+        expect(response.body.error).toBe('Error: image does not exist.');
         done();
       })
       .catch((err) => {
