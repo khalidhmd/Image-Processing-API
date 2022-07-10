@@ -3,7 +3,11 @@ import path from 'path';
 import fileExists from '../helpers/fileExists';
 
 // check if file already in thumbs folder
-const checkThumb = async (req: Request, res: Response, next: () => void) => {
+const checkThumb = async (
+  req: Request,
+  res: Response,
+  next: () => void,
+): Promise<void> => {
   const file = <string>req.query.file;
   const thumbArray = file.split('.');
   const width = req.query.w;
@@ -23,7 +27,8 @@ const checkThumb = async (req: Request, res: Response, next: () => void) => {
   req.thumbPath = thumbPath;
   if (exists) {
     // send the thumb file if it's already exist
-    return res.sendFile(req.thumbPath);
+    res.sendFile(req.thumbPath);
+    return;
   }
   // pass onto the next middleware if the thumb files does not exist and the request is valid
   next();

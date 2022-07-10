@@ -6,7 +6,7 @@ const processThumb = async (
   thumbPath: string,
   width: number,
   height: number,
-) => {
+): Promise<boolean> => {
   try {
     await sharp(imagePath).resize(width, height).toFile(thumbPath);
     return true;
